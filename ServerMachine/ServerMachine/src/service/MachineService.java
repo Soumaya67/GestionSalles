@@ -140,11 +140,10 @@ public class MachineService extends UnicastRemoteObject implements IDao<Machine>
             session = HibernateUtil.getSessionFactory().openSession();
             tx = session.beginTransaction();
 
-            String sql = "SELECT * FROM machine WHERE sa_id = :saId";
+            String sql = "select * from Machine WHERE salle_id =: salleId";
             SQLQuery query = session.createSQLQuery(sql);
-            query.setParameter("saId", id);
-            query.addEntity(Machine.class); // Map the results to the Machine entity.
-
+            query.setParameter("salleId", id);
+            query.addEntity(Machine.class); 
             machines = query.list();
             tx.commit();
         } catch (HibernateException ex) {
